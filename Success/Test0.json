@@ -1,0 +1,43 @@
+{
+    "parallelRuns": [{
+            "reportSuffix": null,
+            "test": "d:\\Work\\UFTTests\\Success",
+            "env": {
+                "web": null,
+                "mobile": {
+                    "lab": "MobileCenter",
+                    "device": {
+                        "deviceID": "R58MA27Z3DY",
+                        "manufacturer": "Samsung",
+                        "model": "SM-A705FN",
+                        "osVersion": null,
+                        "osType": null
+                    }
+                }
+            },
+            "reportPath": "d:\\Work\\UFTTests\\Success",
+            "logFolder": null,
+            "logLevel": null,
+            "runMode": null,
+            "settings": null
+        }
+    ],
+    "reportPath": "d:\\Work\\UFTTests\\Success\\ParallelReport",
+    "logFolder": null,
+    "logLevel": null,
+    "runMode": null,
+    "settings": {
+        "mc": {
+            "protocol": "http",
+            "hostname": "localhost",
+            "port": 8081,
+            "pathname": null,
+            "account": null,
+            "username": "admin@default.com",
+            "password": "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAHJxH62WdOkqo2YSzwPV0uQQAAAACAAAAAAADZgAAwAAAABAAAACxnlqG8kRp/XCF8UZLQHBbAAAAAASAAACgAAAAEAAAADiqBD1HRiZPGzhbUyU4XIcYAAAA+10Wtg8jRVV8Ir4kozr6Wkfsqsn+wGYTFAAAAEShXfY4MB5rTUmAJShzTEFR71eU",
+            "tenantId": "",
+            "workspaceId": null,
+            "proxy": null
+        }
+    }
+}
