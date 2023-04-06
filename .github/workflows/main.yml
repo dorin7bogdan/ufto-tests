@@ -22,12 +22,19 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: Display the working folder
-      run: echo "$GITHUB_WORKSPACE"
-    - uses: actions/checkout@v3
+      run: echo "$env:GITHUB_WORKSPACE"
+    - name: Checkout current repo
+      uses: actions/checkout@v3
       with:
-        fetch-depth: 2
-    - name: Checkout curent repo
-      run: git checkout HEAD^ 
+        ref: main
+
+  createPropsFile:
+    runs-on: self-hosted
+    steps:
+    - run: |
+        "runType=FileSystem" > $env:PROPS_TXT
+        "Test1=$($pwd.Path.Replace("\", "\\"))" >> $env:PROPS_TXT
+        "resultsFilename=ResultsMultiTests.xml" >> $env:PROPS_TXT
 
   runUftTestFromFileSystem:
     runs-on: self-hosted
