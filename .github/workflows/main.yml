@@ -1,0 +1,45 @@
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI or API.
+on:
+  workflow_dispatch:
+    inputs:
+      test-folder:
+        description: 'The full absolute path of UFT tests folder'
+        default: 'D:\Work\UFTTests\Success'
+        required: true
+
+env:
+  PROPS_TXT: PropsMultiTests.txt
+  LAUNCHER_EXE: FTToolsLauncher.exe
+  LAUNCHER_URL: https://github.com/MicroFocus/ADM-FT-ToolsLauncher/releases/download/v1.0-beta-rev12/FTToolsLauncher_net48.exe
+defaults:
+  run:
+    shell: pwsh
+    #working-directory: 
+    # ${{GITHUB_WORKSPACE}}
+
+jobs:
+  getUftOneTests:
+    runs-on: self-hosted
+    steps:
+    - name: Display the working folder
+      run: echo "$GITHUB_WORKSPACE"
+    - name: Checkout curent repo
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+    - run: git checkout HEAD^ 
+
+  runUftTestFromFileSystem:
+    runs-on: self-hosted
+    steps:
+    - name: Get FTToolsLauncher.exe
+      run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
+    - name: Run FT tool
+      run: $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
+    - name: Get Exit Code
+      run: $x = $p.ExitCode
+    - name: Final Status
+      run: if ($x -eq 0) { Write-Host 'PASS' } else {Write-Error 'FAIL' }
+      
