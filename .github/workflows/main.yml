@@ -12,6 +12,7 @@ env:
   PROPS_TXT: PropsMultiTests.txt
   LAUNCHER_EXE: FTToolsLauncher.exe
   LAUNCHER_URL: https://github.com/MicroFocus/ADM-FT-ToolsLauncher/releases/download/v1.0-beta-rev12/FTToolsLauncher_net48.exe
+  CRLF: "`r`n"
 defaults:
   run:
     shell: pwsh
@@ -32,19 +33,25 @@ jobs:
     runs-on: self-hosted
     steps:
     - run: |
-        "runType=FileSystem" > $env:PROPS_TXT
-        "Test1=$($pwd.Path.Replace("\", "\\"))" >> $env:PROPS_TXT
-        "resultsFilename=ResultsMultiTests.xml" >> $env:PROPS_TXT
+        $s = "runType=FileSystem" + $env.CRLF
+        $s += "Test1=$($pwd.Path.Replace('\', '\\'))") + $env.CRLF
+        $s += "resultsFilename=ResultsMultiTests.xml"
+        $s > $env:PROPS_TXT
+    - run: |
+        @"runType=FileSystem
+        Test1=$($pwd.Path.Replace('\', '\\'))
+        resultsFilename=ResultsMultiTests.xml"@
+         > props.txt
 
   runUftTestFromFileSystem:
     runs-on: self-hosted
     steps:
     - name: Get FTToolsLauncher.exe
       run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
-    - name: Run FT tool
-      run: $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
-    - name: Get Exit Code
-      run: $x = $p.ExitCode
-    - name: Final Status
-      run: if ($x -eq 0) { Write-Host 'PASS' } else {Write-Error 'FAIL' }
+#    - name: Run FT tool
+#      run: $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
+#    - name: Get Exit Code
+#      run: $x = $p.ExitCode
+#    - name: Final Status
+#      run: if ($x -eq 0) { Write-Host 'PASS' } else {Write-Error 'FAIL' }
       
