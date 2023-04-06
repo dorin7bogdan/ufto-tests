@@ -8,7 +8,6 @@ on:
         description: 'The full absolute path of UFT tests folder'
         default: 'D:\Work\UFTTests\Success'
         required: true
-
 env:
   PROPS_TXT: PropsMultiTests.txt
   LAUNCHER_EXE: FTToolsLauncher.exe
@@ -16,8 +15,7 @@ env:
 defaults:
   run:
     shell: pwsh
-    #working-directory: 
-    # ${{GITHUB_WORKSPACE}}
+    #working-directory: ${{GITHUB_WORKSPACE}}
 
 jobs:
   getUftOneTests:
@@ -25,11 +23,11 @@ jobs:
     steps:
     - name: Display the working folder
       run: echo "$GITHUB_WORKSPACE"
-    - name: Checkout curent repo
     - uses: actions/checkout@v3
       with:
         fetch-depth: 2
-    - run: git checkout HEAD^ 
+    - name: Checkout curent repo
+      run: git checkout HEAD^ 
 
   runUftTestFromFileSystem:
     runs-on: self-hosted
