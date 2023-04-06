@@ -19,22 +19,22 @@ defaults:
     #working-directory: ${{GITHUB_WORKSPACE}}
 
 jobs:
-  getUftOneTests:
-    runs-on: self-hosted
-    steps:
-    - name: Display the working folder
-      run: echo "$env:GITHUB_WORKSPACE"
-    - name: Checkout current repo
-      uses: actions/checkout@v3
-      with:
-        ref: main
+#  getUftOneTests:
+#    runs-on: self-hosted
+#    steps:
+#    - name: Display the working folder
+#      run: echo "$env:GITHUB_WORKSPACE"
+#    - name: Checkout current repo
+#      uses: actions/checkout@v3
+#     with:
+#        ref: main
 
   createPropsFile:
     runs-on: self-hosted
     steps:
     - run: |
         $s = "runType=FileSystem" + $env.CRLF
-        $s += "Test1=$($pwd.Path.Replace('\', '\\'))") + $env.CRLF
+        $s += "Test1=$($pwd.Path.Replace('\', '\\'))" + $env.CRLF
         $s += "resultsFilename=ResultsMultiTests.xml"
         $s > $env:PROPS_TXT
     - run: |
