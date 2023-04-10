@@ -15,9 +15,28 @@ defaults:
     working-directory: $env:GITHUB_WORKSPACE\..
 
 jobs:
-  getUftOneTests:
+  dump_contexts_to_log:
     runs-on: self-hosted
     steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
+
+  getUftOneTests:
+    runs-on: self-hosted
+    needs: dump_contexts_to_log
+    steps:
+    - run: echo 'Job context is ${{ toJSON(job) }}'
     - name: Display the working folder
       run: echo "$env:GITHUB_WORKSPACE"
     - name: Checkout current repo
@@ -29,7 +48,8 @@ jobs:
     runs-on: self-hosted
     needs: getUftOneTests
     steps:
-    - name: Create properies file
+    - run: echo 'Job context is ${{ toJSON(job) }}'
+    - name: Create properties file
       run: |
         @"
         runType=FileSystem
