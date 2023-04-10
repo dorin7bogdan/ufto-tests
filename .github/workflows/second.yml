@@ -12,7 +12,7 @@ env:
 defaults:
   run:
     shell: pwsh
-    #working-directory: $env:GITHUB_WORKSPACE\..
+    working-directory: ..\
 
 jobs:
   dump_contexts_to_log:
@@ -37,8 +37,10 @@ jobs:
     needs: dump_contexts_to_log
     steps:
     - run: echo 'Job context is ${{ toJSON(job) }}'
-    - name: Display the working folder
+    - name: Display the working folder GITHUB_WORKSPACE
       run: echo "$env:GITHUB_WORKSPACE"
+    - name: Display the working folder RUNNER_WORKSPACE
+      run: echo "$env:RUNNER_WORKSPACE"
     - name: Checkout current repo
       uses: actions/checkout@v3
       with:
@@ -48,7 +50,6 @@ jobs:
     runs-on: self-hosted
     needs: getUftOneTests
     steps:
-    - run: echo 'Job context is ${{ toJSON(job) }}'
     - name: Create properties file
       run: |
         @"
@@ -57,4 +58,13 @@ jobs:
         resultsFilename=$env:RES_XML
         "@ > $env:PROPS_TXT
     - name: Check properies file
+      run: TEST-PATH $env:PROPS_TXT
+
+  getFTToolsLauncher:
+    runs-on: self-hosted
+    needs: getUftOneTests
+    steps:
+    - name: Get FTToolsLauncher.exe
+      run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
+    - name: Check if FTToolsLauncher.exe exists
       run: TEST-PATH $env:PROPS_TXT
