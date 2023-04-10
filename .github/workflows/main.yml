@@ -3,11 +3,7 @@ name: Manual workflow
 # Controls when the action will run. Workflow runs when manually triggered using the UI or API.
 on:
   workflow_dispatch:
-    inputs:
-      test-folder:
-        description: 'The full absolute path of UFT tests folder'
-        default: 'D:\Work\UFTTests\Success'
-        required: true
+
 env:
   PROPS_TXT: PropsMultiTests.txt
   RES_XML: ResultsMultiTests.xml
