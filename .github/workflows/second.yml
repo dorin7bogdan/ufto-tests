@@ -12,7 +12,7 @@ env:
 defaults:
   run:
     shell: pwsh
-    working-directory: $env:GITHUB_WORKSPACE\..
+    #working-directory: $env:GITHUB_WORKSPACE\..
 
 jobs:
   dump_contexts_to_log:
