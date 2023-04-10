@@ -12,7 +12,7 @@ env:
 defaults:
   run:
     shell: pwsh
-    working-directory: ${{GITHUB_WORKSPACE}}\..
+    working-directory: $env:GITHUB_WORKSPACE\..
 
 jobs:
   getUftOneTests:
@@ -23,7 +23,7 @@ jobs:
     - name: Checkout current repo
       uses: actions/checkout@v3
       with:
-        ref: main
+        ref: $env:GITHUB_REF_NAME
 
   createPropsFile:
     runs-on: self-hosted
