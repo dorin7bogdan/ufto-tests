@@ -12,23 +12,28 @@ env:
 defaults:
   run:
     shell: pwsh
-    working-directory: $env:GITHUB_WORKSPACE\..
+    working-directory: ..\
 
 jobs:
   getUftOneTests:
     runs-on: self-hosted
     steps:
-    - name: Display the working folder
+    - name: Display the working folder GITHUB_WORKSPACE
       run: echo "$env:GITHUB_WORKSPACE"
+    - name: Display the working folder RUNNER_WORKSPACE
+      run: echo "$env:RUNNER_WORKSPACE"
+    - name: Display the working dir using $pwd
+      run: echo "$pwd"
     - name: Checkout current repo
       uses: actions/checkout@v3
       with:
-        ref: $env:GITHUB_REF_NAME
+        ref: ${{github.ref_name}}
 
   createPropsFile:
     runs-on: self-hosted
+    needs: getUftOneTests
     steps:
-    - name: Create properies file
+    - name: Create properties file
       run: |
         @"
         runType=FileSystem
@@ -40,11 +45,12 @@ jobs:
 
   getFTToolsLauncher:
     runs-on: self-hosted
+    needs: getUftOneTests
     steps:
     - name: Get FTToolsLauncher.exe
       run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
     - name: Check if FTToolsLauncher.exe exists
-      run: TEST-PATH $env:PROPS_TXT
+      run: TEST-PATH $env:LAUNCHER_EXE
 
   runUftTestFromFileSystem:
     runs-on: self-hosted
