@@ -33,14 +33,14 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: Create properies file
-    - run: |
+      run: |
         @"
         runType=FileSystem
         Test1=$($pwd.Path.Replace('\', '\\'))
         resultsFilename=$env:RES_XML
         "@ > $env:PROPS_TXT
     - name: Check properies file
-    - run: TEST-PATH $env:PROPS_TXT
+      run: TEST-PATH $env:PROPS_TXT
 
   getFTToolsLauncher:
     runs-on: self-hosted
@@ -48,7 +48,7 @@ jobs:
     - name: Get FTToolsLauncher.exe
       run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
     - name: Check if FTToolsLauncher.exe exists
-    - run: TEST-PATH $env:PROPS_TXT
+      run: TEST-PATH $env:PROPS_TXT
 
   runUftTestFromFileSystem:
     runs-on: self-hosted
