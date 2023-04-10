@@ -10,44 +10,49 @@ on:
         required: true
 env:
   PROPS_TXT: PropsMultiTests.txt
+  RES_XML: ResultsMultiTests.xml
   LAUNCHER_EXE: FTToolsLauncher.exe
   LAUNCHER_URL: https://github.com/MicroFocus/ADM-FT-ToolsLauncher/releases/download/v1.0-beta-rev12/FTToolsLauncher_net48.exe
-  CRLF: "`r`n"
 defaults:
   run:
     shell: pwsh
-    #working-directory: ${{GITHUB_WORKSPACE}}
+    working-directory: ${{GITHUB_WORKSPACE}}\..
 
 jobs:
-#  getUftOneTests:
-#    runs-on: self-hosted
-#    steps:
-#    - name: Display the working folder
-#      run: echo "$env:GITHUB_WORKSPACE"
-#    - name: Checkout current repo
-#      uses: actions/checkout@v3
-#     with:
-#        ref: main
+  getUftOneTests:
+    runs-on: self-hosted
+    steps:
+    - name: Display the working folder
+      run: echo "$env:GITHUB_WORKSPACE"
+    - name: Checkout current repo
+      uses: actions/checkout@v3
+      with:
+        ref: main
 
   createPropsFile:
     runs-on: self-hosted
     steps:
+    - name: Create properies file
     - run: |
         @"
         runType=FileSystem
         Test1=$($pwd.Path.Replace('\', '\\'))
-        resultsFilename=ResultsMultiTests.xml
+        resultsFilename=$env:RES_XML
         "@ > $env:PROPS_TXT
+    - name: Check properies file
+    - run: TEST-PATH $env:PROPS_TXT
 
   getFTToolsLauncher:
     runs-on: self-hosted
     steps:
     - name: Get FTToolsLauncher.exe
       run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
+    - name: Check if FTToolsLauncher.exe exists
+    - run: TEST-PATH $env:PROPS_TXT
 
   runUftTestFromFileSystem:
     runs-on: self-hosted
-    needs: [createPropsFile, getFTToolsLauncher]
+    needs: [getUftOneTests, createPropsFile, getFTToolsLauncher]
     steps:
     - name: Run FT tool
       run: $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
