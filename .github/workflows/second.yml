@@ -36,7 +36,6 @@ jobs:
     runs-on: self-hosted
     needs: dump_contexts_to_log
     steps:
-    - run: echo 'Job context is ${{ toJSON(job) }}'
     - name: Display the working folder GITHUB_WORKSPACE
       run: echo "$env:GITHUB_WORKSPACE"
     - name: Display the working folder RUNNER_WORKSPACE
@@ -45,6 +44,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         ref: ${{github.ref_name}}
+        clean: false
 
   createPropsFile:
     runs-on: self-hosted
@@ -64,7 +64,10 @@ jobs:
     runs-on: self-hosted
     needs: getUftOneTests
     steps:
+    - name: Check if FTToolsLauncher.exe exists
+      run:  if (TEST-PATH $env:LAUNCHER_EXE) { Write-Host 'PASS' } else {Write-Error 'FAIL' }
     - name: Get FTToolsLauncher.exe
+      if: ${{ failure() }}
       run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
     - name: Check if FTToolsLauncher.exe exists
-      run: TEST-PATH $env:PROPS_TXT
+      run: TEST-PATH $env:LAUNCHER_EXE
