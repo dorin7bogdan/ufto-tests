@@ -33,15 +33,17 @@ jobs:
     runs-on: self-hosted
     steps:
     - run: |
-        $s = "runType=FileSystem" + $env.CRLF
-        $s += "Test1=$($pwd.Path.Replace('\', '\\'))" + $env.CRLF
-        $s += "resultsFilename=ResultsMultiTests.xml"
+        $s = "runType=FileSystem"
+        $s += "`r`nTest1=$($pwd.Path.Replace('\', '\\'))"
+        $s += "`r`nresultsFilename=ResultsMultiTests.xml"
         $s > $env:PROPS_TXT
     - run: |
-        @"runType=FileSystem
+        $s = @"
+        runType=FileSystem
         Test1=$($pwd.Path.Replace('\', '\\'))
-        resultsFilename=ResultsMultiTests.xml"@
-         > props.txt
+        resultsFilename=ResultsMultiTests.xml
+        "@
+        $s > props.txt
 
   runUftTestFromFileSystem:
     runs-on: self-hosted
