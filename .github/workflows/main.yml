@@ -18,11 +18,7 @@ jobs:
   getUftOneTests:
     runs-on: self-hosted
     steps:
-    - name: Display the working folder GITHUB_WORKSPACE
-      run: echo "$env:GITHUB_WORKSPACE"
-    - name: Display the working folder RUNNER_WORKSPACE
-      run: echo "$env:RUNNER_WORKSPACE"
-    - name: Display the working dir using $pwd
+    - name: Display the working directory
       run: echo "$pwd"
     - name: Checkout current repo
       uses: actions/checkout@v3
