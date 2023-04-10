@@ -1,0 +1,26 @@
+name: Manual workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI or API.
+on:
+  workflow_dispatch:
+
+env:
+  PROPS_TXT: PropsMultiTests.txt
+  RES_XML: ResultsMultiTests.xml
+  LAUNCHER_EXE: FTToolsLauncher.exe
+  LAUNCHER_URL: https://github.com/MicroFocus/ADM-FT-ToolsLauncher/releases/download/v1.0-beta-rev12/FTToolsLauncher_net48.exe
+defaults:
+  run:
+    shell: pwsh
+    working-directory: $env:GITHUB_WORKSPACE\..
+
+jobs:
+  getUftOneTests:
+    runs-on: self-hosted
+    steps:
+    - name: Display the working folder
+      run: echo "$env:GITHUB_WORKSPACE"
+    - name: Checkout current repo
+      uses: actions/checkout@v3
+      with:
+        ref: ${{github.ref_name}}
