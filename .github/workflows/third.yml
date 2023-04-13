@@ -18,11 +18,4 @@ jobs:
   checkFTToolsLauncher:
     runs-on: self-hosted
     steps:
-    - name: CHECK FTToolsLauncher.exe
-      run:  if (TEST-PATH $env:LAUNCHER_EXE) {
-              Write-Host 'FTToolsLauncher.exe is available' 
-            } else {
-              Write-Error 'FTToolsLauncher.exe not found' 
-            }
-    - run: $x = -2
-    - run: Write-Error "Process completed with exit code $x"
+    - run: $x = -2; Write-Error "Process completed with exit code $x"
