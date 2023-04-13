@@ -19,8 +19,8 @@ jobs:
   checkFTToolsLauncher:
     runs-on: self-hosted
     steps:
-    - run: $env:X = -2
-    - run: echo $env:X
+    - run: ${{env.X = -2}}
+    - run: echo ${{env.X}}
     - name: End
       if: ${{ env.X != 0 }}
       uses: actions/github-script@v3
