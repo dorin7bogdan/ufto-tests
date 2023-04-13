@@ -56,10 +56,12 @@ jobs:
     needs: [getUftTests, createPropsFile, getFTToolsLauncher]
     steps:
     - name: Run FT tool
-      run: $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
-#    - name: Get Exit Code
-#      run: $x = $p.ExitCode
-    - name: Final Status
-      #run: if ($x -eq 0) { echo 'PASS' } else {Write-Error 'FAIL' }
-      run: exit $p.ExitCode
-      
+      id: run-tests
+      run: |
+        $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
+        X=$p.ExitCode >> $env:GITHUB_OUTPUT
+    - if: ${{steps.run-tests.outputs.X}} != 0
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.setFailed('The job runUftTestsFromFileSystem failed with status ${{steps.step1.outputs.X}} !')        
