@@ -15,7 +15,7 @@ defaults:
     working-directory: ..\
 
 jobs:
-  getUftOneTests:
+  getUftTests:
     runs-on: self-hosted
     steps:
     - name: Display the working directory
@@ -28,7 +28,7 @@ jobs:
     
   createPropsFile:
     runs-on: self-hosted
-    needs: getUftOneTests
+    needs: getUftTests
     steps:
     - name: Create properties file
       run: |
@@ -42,23 +42,24 @@ jobs:
 
   getFTToolsLauncher:
     runs-on: self-hosted
-    needs: getUftOneTests
+    needs: getUftTests
     steps:
     - name: GET FTToolsLauncher.exe
       run:  if (TEST-PATH $env:LAUNCHER_EXE) {
-              Write-Host 'FTToolsLauncher.exe already exists' 
+              echo "FTToolsLauncher.exe already exists"
             } else {
               curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
             }
 
-  runUftTestFromFileSystem:
+  runUftTestsFromFileSystem:
     runs-on: self-hosted
-    needs: [getUftOneTests, createPropsFile, getFTToolsLauncher]
+    needs: [getUftTests, createPropsFile, getFTToolsLauncher]
     steps:
     - name: Run FT tool
       run: $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
-    - name: Get Exit Code
-      run: $x = $p.ExitCode
+#    - name: Get Exit Code
+#      run: $x = $p.ExitCode
     - name: Final Status
-      run: if ($x -eq 0) { Write-Host 'PASS' } else {Write-Error 'FAIL' }
+      #run: if ($x -eq 0) { echo 'PASS' } else {Write-Error 'FAIL' }
+      run: exit $p.ExitCode
       
