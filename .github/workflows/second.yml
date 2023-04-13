@@ -64,10 +64,24 @@ jobs:
     runs-on: self-hosted
     needs: getUftOneTests
     steps:
+    - name: Check / get FTToolsLauncher.exe
+      run:  |
+            if (TEST-PATH $env:LAUNCHER_EXE) {
+              Write-Host 'FTToolsLauncher.exe already exists' 
+            } else {
+              curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
+            }
+#    - name: Get FTToolsLauncher.exe
+#      if: ${{ failure() }}
+#      run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
+  checkFTToolsLauncher:
+    runs-on: self-hosted
+    needs: getFTToolsLauncher
+    steps:
     - name: Check if FTToolsLauncher.exe exists
-      run:  if (TEST-PATH $env:LAUNCHER_EXE) { Write-Host 'PASS' } else {Write-Error 'FAIL' }
-    - name: Get FTToolsLauncher.exe
-      if: ${{ failure() }}
-      run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
-    - name: Check if FTToolsLauncher.exe exists
-      run: TEST-PATH $env:LAUNCHER_EXE
+      run:  |
+            if (TEST-PATH $env:LAUNCHER_EXE) {
+              Write-Host 'FTToolsLauncher.exe checked successfully' 
+            } else {
+              Write-Host 'FTToolsLauncher.exe does not exist' 
+            }
