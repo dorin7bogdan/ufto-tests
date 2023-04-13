@@ -15,10 +15,8 @@ jobs:
     steps:
     - id: step1
       run: |
-        "X=-2" >> $env:GITHUB_OUTPUT
-    - name: Write Error
-      if: ${{steps.step1.outputs.X}} != 0
-      run: Write-Error "The job failed with status ${{steps.step1.outputs.X}} !"
+        $q = -2
+        "X=$q" >> $env:GITHUB_OUTPUT
     - if: ${{steps.step1.outputs.X}} != 0
       uses: actions/github-script@v6
       with:
