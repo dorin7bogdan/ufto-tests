@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 
 env:
+  X: 0
   PROPS_TXT: PropsMultiTests.txt
   RES_XML: ResultsMultiTests.xml
   LAUNCHER_EXE: FTToolsLauncher.exe
@@ -18,11 +19,11 @@ jobs:
   checkFTToolsLauncher:
     runs-on: self-hosted
     steps:
-    - run: $x = -2
-    - run: echo $x
+    - run: $env:X = -2
+    - run: echo $env:X
     - name: End
-      if: $x != 0
+      if: $env:X != 0
       uses: actions/github-script@v3
       with:
         script: |
-          core.setFailed('envA and envB are not equivalent!')    
+          core.setFailed('The job failed with status TODO !')    
