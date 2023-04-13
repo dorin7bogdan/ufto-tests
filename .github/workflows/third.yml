@@ -4,11 +4,6 @@ name: Manual workflow 3
 on:
   workflow_dispatch:
 
-env:
-  PROPS_TXT: PropsMultiTests.txt
-  RES_XML: ResultsMultiTests.xml
-  LAUNCHER_EXE: FTToolsLauncher.exe
-  LAUNCHER_URL: https://github.com/MicroFocus/ADM-FT-ToolsLauncher/releases/download/v1.0-beta-rev12/FTToolsLauncher_net48.exe
 defaults:
   run:
     shell: pwsh
@@ -20,8 +15,8 @@ jobs:
     steps:
     - id: step1
       run: echo "X=-2" >> $GITHUB_OUTPUT
-    - id: step2
-      if: steps.step1.outputs.X != 0
+    - run: echo "${{steps.step1.outputs.X}}"
+    - if: ${{steps.step1.outputs.X}} != 0
       uses: actions/github-script@v3
       with:
         script: |
