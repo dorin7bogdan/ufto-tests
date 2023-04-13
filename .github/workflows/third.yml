@@ -18,4 +18,11 @@ jobs:
   checkFTToolsLauncher:
     runs-on: self-hosted
     steps:
-    - run: $x = -2; Write-Error "Process completed with exit code $x"
+    - run: $x = -2
+    - run: echo ${{ x }}
+    - name: End
+      if: ${{ x != 0 }}
+      uses: actions/github-script@v3
+      with:
+        script: |
+          core.setFailed('envA and envB are not equivalent!')    
