@@ -21,7 +21,7 @@ jobs:
     - run: $x = -2
     - run: echo $x
     - name: End
-      if: ${{ $x != 0 }}
+      if: ${{ x != 0 }}
       uses: actions/github-script@v3
       with:
         script: |
