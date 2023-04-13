@@ -14,7 +14,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - id: step1
-      run: echo "X=-2" >> $GITHUB_OUTPUT
+      run: echo "X=-2" >> $env:GITHUB_OUTPUT
     - run: echo "${{steps.step1.outputs.X}}"
     - if: ${{steps.step1.outputs.X}} != 0
       uses: actions/github-script@v3
