@@ -83,3 +83,4 @@ jobs:
             } else {
               Write-Error 'FTToolsLauncher.exe not found' 
             }
+    - run: exit -1
