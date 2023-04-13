@@ -17,7 +17,6 @@ defaults:
 jobs:
   checkFTToolsLauncher:
     runs-on: self-hosted
-    needs: getFTToolsLauncher
     steps:
     - name: CHECK FTToolsLauncher.exe
       run:  if (TEST-PATH $env:LAUNCHER_EXE) {
