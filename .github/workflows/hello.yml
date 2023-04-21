@@ -1,0 +1,19 @@
+name: Hello World!
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI or API.
+on:
+  workflow_dispatch:
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Hello world action step
+        id: hello
+        uses: dorin7bogdan/hello-js-action@v1.0
+        with:
+          who-to-greet: 'Mister Master'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
