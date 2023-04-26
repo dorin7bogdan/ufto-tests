@@ -4,21 +4,27 @@ name: Hello World!
 on:
   workflow_dispatch:
     inputs:
-      to:
+      work-dir:
         description: 'The full absolute path of UFT tests folder'
-        default: "Mister King"
+        default: "D:\\Work\\Temp\\UFT"
+        type: string
+        required: true
+      test:
+        description: "The list of paths with test locations"
+        default: "D:\\Work\\UFTTests\\uft-one-tests"
         type: string
         required: true
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
+  hello_uft_job:
+    runs-on: self-hosted
     name: A job to say hello
     steps:
       - name: Hello world action step
         id: hello
         uses: dorin7bogdan/hello-js-action@main
         with:
-          who-to-greet: ${{inputs.to}}
+          work-dir: ${{inputs.work-dir}}
+          tests: ${{inputs.test}}
       # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Get the output exit-code
+        run: echo "The time was ${{ steps.hello.outputs.exit-code }}"
