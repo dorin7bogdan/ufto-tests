@@ -6,17 +6,30 @@ on:
     inputs:
       work-dir:
         description: 'The full absolute path of UFT tests folder'
-        default: "D:\\Work\\Temp\\UFT"
+        #default: "D:\\Work\\Temp\\UFT"
+        default: ..\
         type: string
         required: true
       test:
         description: "The list of paths with test locations"
-        default: "D:\\Work\\UFTTests\\uft-one-tests"
+        #default: "D:\\Work\\UFTTests\\uft-one-tests"
+        default: .\uft-one-tests
         type: string
         required: true
 jobs:
-  hello_uft_job:
+  getUftTests:
     runs-on: self-hosted
+    steps:
+    - name: Display the working directory
+      run: echo "$pwd"
+    - name: Checkout current repo
+      uses: actions/checkout@v3
+      with:
+        ref: ${{github.ref_name}}
+        clean: false
+  runUftTests:
+    runs-on: self-hosted
+    needs: getUftTests
     name: A job to say hello
     steps:
       - name: Hello world action step
