@@ -1,0 +1,67 @@
+name: Manual workflow UFT One tests Demo
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI or API.
+on:
+  workflow_dispatch:
+
+env:
+  PROPS_TXT: PropsMultiTests.txt
+  RES_XML: ResultsMultiTests.xml
+  LAUNCHER_EXE: FTToolsLauncher.exe
+  LAUNCHER_URL: https://github.com/MicroFocus/ADM-FT-ToolsLauncher/releases/download/v1.0-beta-rev12/FTToolsLauncher_net48.exe
+defaults:
+  run:
+    shell: pwsh
+    working-directory: ..\
+
+jobs:
+  getUftTests:
+    runs-on: self-hosted
+    steps:
+    - name: Display the working directory
+      run: echo "$pwd"
+    - name: Checkout current repo
+      uses: actions/checkout@v3
+      with:
+        ref: ${{github.ref_name}}
+        clean: false
+    
+  createPropsFile:
+    runs-on: self-hosted
+    needs: getUftTests
+    steps:
+    - name: Create properties file
+      run: |
+        @"
+        runType=FileSystem
+        Test1=$($pwd.Path.Replace('\', '\\') + '\\Success')
+        resultsFilename=$env:RES_XML
+        "@ > $env:PROPS_TXT
+    - name: Check properies file
+      run: TEST-PATH $env:PROPS_TXT
+
+  getFTToolsLauncher:
+    runs-on: self-hosted
+    needs: getUftTests
+    steps:
+    - name: GET FTToolsLauncher.exe
+      run:  if (TEST-PATH $env:LAUNCHER_EXE) {
+              echo "FTToolsLauncher.exe already exists"
+            } else {
+              curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
+            }
+
+  runUftTestsFromFileSystem:
+    runs-on: self-hosted
+    needs: [getUftTests, createPropsFile, getFTToolsLauncher]
+    steps:
+    - name: Run FT tool
+      id: run-tests
+      run: |
+        $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
+        "X=$($p.ExitCode)" >> $env:GITHUB_OUTPUT
+    - if: ${{steps.run-tests.outputs.X}} != "0"
+      uses: actions/github-script@v6
+      with:
+        script: |
+          core.setFailed('The job runUftTestsFromFileSystem failed with status ${{steps.run-tests.outputs.X}} !')        
