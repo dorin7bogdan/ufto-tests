@@ -60,7 +60,7 @@ jobs:
       run: |
         $p = Start-Process -FilePath "$env:LAUNCHER_EXE" -ArgumentList "-paramfile $env:PROPS_TXT" -Wait -PassThru -NoNewWindow
         "X=$($p.ExitCode)" >> $env:GITHUB_OUTPUT
-    - if: ${{steps.run-tests.outputs.X}} != "0"
+    - if: ${{steps.run-tests.outputs.X}}
       uses: actions/github-script@v6
       with:
         script: |
