@@ -1,4 +1,4 @@
-name: UFT One Tests
+name: UFT One Tests Main
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI or API.
 on:
