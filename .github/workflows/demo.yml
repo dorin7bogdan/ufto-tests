@@ -34,7 +34,7 @@ jobs:
       run: |
         @"
         runType=FileSystem
-        Test1=$($pwd.Path.Replace('\', '\\') + '\\Success')
+        Test1=$($pwd.Path.Replace('\', '\\') + '\\uft-one-tests\\Success')
         resultsFilename=$env:RES_XML
         "@ > $env:PROPS_TXT
     - name: Check properies file
