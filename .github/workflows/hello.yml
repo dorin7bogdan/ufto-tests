@@ -16,6 +16,11 @@ on:
         default: .\uft-one-tests
         type: string
         required: true
+      isDemo:
+        description: "This is a flag"
+        default: true
+        type: boolean
+        required: false
 jobs:
   getUftTests:
     runs-on: self-hosted
