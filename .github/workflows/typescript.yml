@@ -1,0 +1,19 @@
+name: Test TypeScript Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run my TypeScript action
+        uses: ./  # Assuming the action is in the same repo
+        with:
+          name: 'Alice'
