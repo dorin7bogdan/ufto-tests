@@ -40,8 +40,8 @@ jobs:
             -Body $body
 
           if ($LASTEXITCODE -ne 0) {
-            Write-Error "Error calling web service"
             Write-Output "Response: $response"
+            Write-Error "Error calling web service"
             exit 1
           }
           Write-Output "Response: $response"
