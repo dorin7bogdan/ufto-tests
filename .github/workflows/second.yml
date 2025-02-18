@@ -17,15 +17,30 @@ jobs:
       - name: Send Data to REST WS
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          SERVICE_URL: ${{ secrets.SERVICE_URL }}
+          VE_TENANT_ID: 129005
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}.git
         run: |
-          response=$(curl -X POST \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $SECRET_KEY" \
-            -d "{\"data\":\"https://github.com/dorin7bogdan/uft-one-tests/\"}" \
-            "$SERVICE_URL/repo/validate")
+          $body = @{
+            url = $env:REPO_URL
+          } | ConvertTo-Json
 
-          echo "Response: $response"
+          $headers = @{
+            'Content-Type' = 'application/json'
+            'X-VE-TENANT-ID' = "$env:VE_TENANT_ID"
+          }
+
+          $response = Invoke-RestMethod `
+            -Method Post `
+            -Uri "$env:SERVICE_URL/repo/validate" `
+            -Headers $headers `
+            -Body $body
+
+          Write-Output "Response: $response"
+
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "Error calling web service"
+            exit 1
+          }
 
 #  dump_contexts_to_log:
 #    runs-on: self-hosted
