@@ -24,14 +24,21 @@ jobs:
             url = $env:REPO_URL
           } | ConvertTo-Json
 
+          Write-Output "Body: $body"
+
           $headers = @{
             'Content-Type' = 'application/json'
             'X-VE-TENANT-ID' = "$env:VE_TENANT_ID"
           }
 
+          Write-Output "Headers: $headers"
+
+          $uri = "$env:SERVICE_URL/repo/validate"
+          Write-Output "URI: $uri"
+
           $response = Invoke-RestMethod `
             -Method Post `
-            -Uri "$env:SERVICE_URL/repo/validate" `
+            -Uri $uri `
             -Headers $headers `
             -Body $body
 
