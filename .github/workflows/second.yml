@@ -1,20 +1,32 @@
-name: Manual workflow 2
+name: Call REST API method
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI or API.
 on:
   workflow_dispatch:
 
 env:
-  PROPS_TXT: PropsMultiTests.txt
-  RES_XML: ResultsMultiTests.xml
-  LAUNCHER_EXE: FTToolsLauncher.exe
-  LAUNCHER_URL: https://github.com/MicroFocus/ADM-FT-ToolsLauncher/releases/download/v1.0-beta-rev12/FTToolsLauncher_net48.exe
+  SERVICE_URL: http://localhost:7070
 defaults:
   run:
     shell: pwsh
-    working-directory: ..\
+    #working-directory: ..\
 
 jobs:
+  send_data:
+    runs-on: self-hosted
+    steps:
+      - name: Send Data to REST WS
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SERVICE_URL: ${{ secrets.SERVICE_URL }}
+        run: |
+          response=$(curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $SECRET_KEY" \
+            -d "{\"data\":\"https://github.com/dorin7bogdan/uft-one-tests/\"}" \
+            "$SERVICE_URL/repo/validate")
+
+          echo "Response: $response"
+
 #  dump_contexts_to_log:
 #    runs-on: self-hosted
 #    steps:
@@ -32,55 +44,3 @@ jobs:
 #      - name: Dump matrix context
 #        run: echo '${{ toJSON(matrix) }}'
 
-  getUftOneTests:
-    runs-on: self-hosted
-#    needs: dump_contexts_to_log
-    steps:
-    - name: Display the working folder GITHUB_WORKSPACE
-      run: echo "$env:GITHUB_WORKSPACE"
-    - name: Display the working folder RUNNER_WORKSPACE
-      run: echo "$env:RUNNER_WORKSPACE"
-    - name: Checkout current repo
-      uses: actions/checkout@v3
-      with:
-        ref: ${{github.ref_name}}
-        clean: false
-
-  createPropsFile:
-    runs-on: self-hosted
-    needs: getUftOneTests
-    steps:
-    - name: Create properties file
-      run: |
-        @"
-        runType=FileSystem
-        Test1=$($pwd.Path.Replace('\', '\\'))
-        resultsFilename=$env:RES_XML
-        "@ > $env:PROPS_TXT
-    - name: Check properies file
-      run: TEST-PATH $env:PROPS_TXT
-
-  getFTToolsLauncher:
-    runs-on: self-hosted
-    needs: getUftOneTests
-    steps:
-    - name: GET FTToolsLauncher.exe
-      run:  if (TEST-PATH $env:LAUNCHER_EXE) {
-              Write-Host 'FTToolsLauncher.exe already exists' 
-            } else {
-              curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
-            }
-#    - name: Get FTToolsLauncher.exe
-#      if: ${{ failure() }}
-#      run: curl -L -o $env:LAUNCHER_EXE $env:LAUNCHER_URL
-  checkFTToolsLauncher:
-    runs-on: self-hosted
-    needs: getFTToolsLauncher
-    steps:
-    - name: CHECK FTToolsLauncher.exe
-      run:  if (TEST-PATH $env:LAUNCHER_EXE) {
-              Write-Host 'FTToolsLauncher.exe is available' 
-            } else {
-              Write-Error 'FTToolsLauncher.exe not found' 
-            }
-    - run: exit -1
