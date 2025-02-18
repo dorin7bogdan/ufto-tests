@@ -39,12 +39,12 @@ jobs:
             -Headers $headers `
             -Body $body
 
-          Write-Output "Response: $response"
-
           if ($LASTEXITCODE -ne 0) {
             Write-Error "Error calling web service"
+            Write-Output "Response: $response"
             exit 1
           }
+          Write-Output "Response: $response"
 
 #  dump_contexts_to_log:
 #    runs-on: self-hosted
