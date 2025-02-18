@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
 
 env:
-  SERVICE_URL: http://rodbogdan:7070
+  SERVICE_URL: http://localhost:7070
 defaults:
   run:
     shell: pwsh
     #working-directory: ..\
 
 jobs:
-  send_data:
+  call_java_ws:
     runs-on: self-hosted
     steps:
       - name: Send Data to REST WS
@@ -20,10 +20,6 @@ jobs:
           VE_TENANT_ID: 129005
           REPO_URL: ${{ github.server_url }}/${{ github.repository }}.git
         run: |
-          $body = @{
-            url = $env:REPO_URL
-          } | ConvertTo-Json
-
           $headers = @{
             'Content-Type' = 'application/json'
             'X-VE-TENANT-ID' = "$env:VE_TENANT_ID"
@@ -31,6 +27,7 @@ jobs:
 
           try {
             $uri = "$env:SERVICE_URL/status"
+            Write-Output "Calling: GET $uri"
             $response = Invoke-RestMethod -Method Get -Uri $uri -Headers $headers
             Write-Output "Response: $response"
           } 
@@ -40,7 +37,12 @@ jobs:
           }
   
           try {
+            $body = @{
+              url = $env:REPO_URL
+            } | ConvertTo-Json
+            
             $uri = "$env:SERVICE_URL/repo/validate"
+            Write-Output "Calling: POST $uri"
             $response = Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -Body $body
             Write-Output "Response: $response"
           }
@@ -48,21 +50,3 @@ jobs:
             Write-Error "Error calling web service: $_"
             exit 1
           }
-
-#  dump_contexts_to_log:
-#    runs-on: self-hosted
-#    steps:
-#      - name: Dump GitHub context
-#        id: github_context_step
-#        run: echo '${{ toJSON(github) }}'
-#      - name: Dump job context
-#        run: echo '${{ toJSON(job) }}'
-#      - name: Dump steps context
-#        run: echo '${{ toJSON(steps) }}'
-#      - name: Dump runner context
-#        run: echo '${{ toJSON(runner) }}'
-#      - name: Dump strategy context
-#        run: echo '${{ toJSON(strategy) }}'
-#      - name: Dump matrix context
-#        run: echo '${{ toJSON(matrix) }}'
-
