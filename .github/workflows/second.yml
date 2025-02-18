@@ -23,7 +23,6 @@ jobs:
           $body = @{
             url = $env:REPO_URL
           } | ConvertTo-Json
-          #Write-Output "Body: $body"
 
           $headers = @{
             'Content-Type' = 'application/json'
@@ -39,7 +38,7 @@ jobs:
 
           if ($LASTEXITCODE -ne 0) {
             Write-Output "Response: $response"
-            Write-Error "Error calling web service"
+            Write-Error "Error calling web service LASTEXITCODE = $LASTEXITCODE"
             exit 1
           }
           Write-Output "Response: $response"
