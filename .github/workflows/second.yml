@@ -29,25 +29,25 @@ jobs:
             'X-VE-TENANT-ID' = "$env:VE_TENANT_ID"
           }
 
-          $uri = "$env:SERVICE_URL/status"
-
-          $response = Invoke-RestMethod `
-            -Method Get `
-            -Uri $uri `
-            -Headers $headers
-
-          if ($LASTEXITCODE -ne 0) {
+          try {
+            $uri = "$env:SERVICE_URL/status"
+            $response = Invoke-RestMethod -Method Get -Uri $uri -Headers $headers
             Write-Output "Response: $response"
-            Write-Error "Error calling web service LASTEXITCODE = $LASTEXITCODE"
+          } 
+          catch {
+            Write-Error "Error calling web service: $_"
             exit 1
           }
-          Write-Output "Response: $response"
-
-#          $response = Invoke-RestMethod `
-#            -Method Post `
-#            -Uri $uri `
-#            -Headers $headers `
-#            -Body $body
+  
+          try {
+            $uri = "$env:SERVICE_URL/repo/validate"
+            $response = Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -Body $body
+            Write-Output "Response: $response"
+          }
+          catch {
+            Write-Error "Error calling web service: $_"
+            exit 1
+          }
 
 #  dump_contexts_to_log:
 #    runs-on: self-hosted
