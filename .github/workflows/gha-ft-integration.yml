@@ -14,7 +14,7 @@ jobs:
           node-version: '20'  # Ensures Node20 is available
           
       - name: GitHub Action FT Integration
-        uses: dorin7bogdan/github-action-ft-integration@v1
+        uses: dorin7bogdan/github-action-ft-integration@main
         id: gha-ft-integration
         with:
           octaneUrl: 'https://qa8.almoctane.com'
