@@ -23,4 +23,4 @@ jobs:
           octaneClientId: ${{secrets.OCTANE_CLIENT_ID}}
           octaneClientSecret: ${{secrets.OCTANE_CLIENT_SECRET}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
-          serverBaseUrl: ${{ github.server_url }}/${{ github.repository }}.git
+          #serverBaseUrl: ${{ github.server_url }}/${{ github.repository }}.git
