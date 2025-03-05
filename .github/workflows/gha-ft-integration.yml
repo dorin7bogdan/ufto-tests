@@ -5,11 +5,16 @@ env:
     NODE_TLS_REJECT_UNAUTHORIZED: 0
 jobs:
   ft_integration_job:
-    runs-on: [self-hosted]
-    name: FT-Integration#${{github.event.action}}#${{github.event.workflow_run.id}}
+    runs-on: windows-latest
+    name: Integration-Job
     steps:
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Ensures Node20 is available
+          
       - name: GitHub Action FT Integration
-        uses: dorin7bogdan/github-action-ft-integration
+        uses: dorin7bogdan/github-action-ft-integration@v1
         id: gha-ft-integration
         with:
           octaneUrl: 'https://qa8.almoctane.com'
