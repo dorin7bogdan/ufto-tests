@@ -1,6 +1,9 @@
 name: GitHub-Action-FT-Integration
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 env: 
     NODE_TLS_REJECT_UNAUTHORIZED: 0
     ACTIONS_STEP_DEBUG: true  # Enables debug logging
