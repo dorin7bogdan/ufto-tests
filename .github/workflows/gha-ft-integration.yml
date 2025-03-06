@@ -8,11 +8,6 @@ jobs:
     runs-on: self-hosted
     name: Integration-Job
     steps:
-      - name: Setup Node.js 22
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'  # Ensures Node20 is available
-          
       - name: GitHub Action FT Integration
         uses: dorin7bogdan/github-action-ft-integration@main
         id: gha-ft-integration
