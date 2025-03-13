@@ -5,7 +5,10 @@ on:
       testing-tool-type:
         description: 'UFT or MBT'
         default: UFT
-        type: string  
+        type: choice
+        options:
+        - UFT
+        - MBT
   push:
     branches:
       - main
