@@ -4,7 +4,7 @@ on:
     inputs:
       testing-tool-type:
         description: 'UFT or MBT'
-        default: UFT
+        default: MBT
         type: choice
         options:
         - UFT
