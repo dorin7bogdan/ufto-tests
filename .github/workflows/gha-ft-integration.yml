@@ -32,4 +32,3 @@ jobs:
           githubToken: ${{secrets.GITHUB_TOKEN}}
           logLevel: 2
           testingToolType: ${{inputs.testing-tool-type}}
-          #serverBaseUrl: ${{ github.server_url }}/${{ github.repository }}.git
