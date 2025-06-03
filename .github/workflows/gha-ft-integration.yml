@@ -33,5 +33,6 @@ jobs:
           octaneClientId: ${{secrets.OCTANE_CLIENT_ID}}
           octaneClientSecret: ${{secrets.OCTANE_CLIENT_SECRET}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
+          syncThresholdSeconds: 15
           logLevel: 2
           testingToolType: ${{inputs.testing-tool-type}}
