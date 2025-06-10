@@ -1,14 +1,14 @@
 name: GitHub-Action-FT-Integration
 on:
   workflow_dispatch:
-    inputs:
-      testing-tool-type:
-        description: 'UFT or MBT'
-        default: MBT
-        type: choice
-        options:
-        - UFT
-        - MBT
+#    inputs:
+#      testing-tool-type:
+#        description: 'UFT or MBT'
+#        default: MBT
+#        type: choice
+#        options:
+#        - UFT
+#        - MBT
   push:
     branches:
       - main
