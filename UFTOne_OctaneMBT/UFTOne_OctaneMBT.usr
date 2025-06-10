@@ -12,8 +12,10 @@ DevelopTool=AQT
 
 [Actions]
 Action0=Action0\Script.mts
-AddOctaneUnit=Action1\Script.mts
-RemoveOctaneUnit=Action2\Script.mts
+LoginOctane=Action1\Script.mts
+CreateFolder=Action2\Script.mts
+CreateModel=Action3\Script.mts
+CreateUnit=Action4\Script.mts
 
 [VuserProfiles]
 Profiles=Default Profile
@@ -37,6 +39,7 @@ Version=24.4
 
 [TulipAddins]
 AF=
+AgGrid=
 AI=
 Database=
 File Content=
@@ -44,6 +47,7 @@ Insight=
 Mobile=
 Windows Applications=
 TEA=
+UIGrid=
 Visual Basic=
 Web=
 .NET=
@@ -64,3 +68,9 @@ Action1\ObjectRepository.bdb=
 Action2\Script.mts=
 Action2\Resource.mtr=
 Action2\ObjectRepository.bdb=
+Action3\Script.mts=
+Action3\Resource.mtr=
+Action3\ObjectRepository.bdb=
+Action4\Script.mts=
+Action4\Resource.mtr=
+Action4\ObjectRepository.bdb=
