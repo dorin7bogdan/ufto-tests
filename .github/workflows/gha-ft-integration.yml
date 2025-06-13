@@ -1,7 +1,23 @@
 name: GitHub-Action-FT-Integration
 on:
   workflow_dispatch:
-#    inputs:
+    inputs:
+      testsToRun:
+        description: 'Tests to run (from OpenText SDP/SDM)'
+        required: true
+        default: ''
+      suiteRunId:
+        description: 'Suite Run Id (from OpenText SDP/SDM)'
+        required: true
+        default: '0'
+      executionId:
+        description: 'Execution Id (from OpenText SDP/SDM)'
+        required: true
+        default: '0'
+      suiteId:
+        description: 'Suite Id (from OpenText SDP/SDM)'
+        required: true
+        default: '0'    
 #      testing-tool-type:
 #        description: 'UFT or MBT'
 #        default: MBT
