@@ -1,5 +1,8 @@
 name: Test Artifact Upload
 on: [workflow_dispatch]
+env:
+    NODE_TLS_REJECT_UNAUTHORIZED: 0
+    ACTIONS_STEP_DEBUG: true  # Enables debug logging
 jobs:
   test-upload:
     runs-on: self-hosted
