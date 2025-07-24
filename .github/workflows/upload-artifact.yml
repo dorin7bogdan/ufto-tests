@@ -4,17 +4,25 @@ jobs:
   test-upload:
     runs-on: self-hosted
     steps:
-      - name: Debug RUNNER_WORKSPACE
+      - name: Debug RUNNER_WORKSPACE and GITHUB_WORKSPACE
         run: |
           echo "RUNNER_WORKSPACE: $env:RUNNER_WORKSPACE"
+          echo "GITHUB_WORKSPACE: $env:GITHUB_WORKSPACE"
+          echo "Current directory: $(Get-Location)"
           dir $env:RUNNER_WORKSPACE
         shell: pwsh
       - name: Create test file in RUNNER_WORKSPACE
         run: |
           echo "test content" > $env:RUNNER_WORKSPACE\test.txt
+          echo "Created file at: $env:RUNNER_WORKSPACE\test.txt"
+          if (Test-Path $env:RUNNER_WORKSPACE\test.txt) { echo "File exists" } else { echo "File missing" }
         shell: pwsh
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact1 # Simplified name to avoid previous naming issues
-          path: ${{ env.RUNNER_WORKSPACE }}\test.txt
+          name: artifact1
+          path: ${{ env.RUNNER_WORKSPACE }}\test.txt # Ensure backslash for Windows
+          if-no-files-found: warn
+          compression-level: 6
+          overwrite: false
+          include-hidden-files: false
