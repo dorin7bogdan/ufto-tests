@@ -4,8 +4,17 @@ jobs:
   test-upload:
     runs-on: self-hosted
     steps:
-      - run: echo "test content" > test.txt
-      - uses: actions/upload-artifact@v4
+      - name: Debug RUNNER_WORKSPACE
+        run: |
+          echo "RUNNER_WORKSPACE: $env:RUNNER_WORKSPACE"
+          dir $env:RUNNER_WORKSPACE
+        shell: pwsh
+      - name: Create test file in RUNNER_WORKSPACE
+        run: |
+          echo "test content" > $env:RUNNER_WORKSPACE\test.txt
+        shell: pwsh
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: test-artifact
-          path: test.txt
+          name: artifact1 # Simplified name to avoid previous naming issues
+          path: ${{ env.RUNNER_WORKSPACE }}/test.txt
