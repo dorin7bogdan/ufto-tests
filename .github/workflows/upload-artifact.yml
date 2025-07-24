@@ -17,4 +17,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact1 # Simplified name to avoid previous naming issues
-          path: ${{ env.RUNNER_WORKSPACE }}/test.txt
+          path: ${{ env.RUNNER_WORKSPACE }}\test.txt
