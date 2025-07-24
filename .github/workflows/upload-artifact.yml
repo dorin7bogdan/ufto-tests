@@ -12,10 +12,9 @@ jobs:
           echo "RUNNER_WORKSPACE: $env:RUNNER_WORKSPACE"
           echo "GITHUB_WORKSPACE: $env:GITHUB_WORKSPACE"
           echo "Current directory: $(Get-Location)"
-          dir $env:RUNNER_WORKSPACE
         shell: pwsh
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact3
+          name: run_results
           path: C:\Plugins\GitHub\runner_ufto-tests\_work\ufto-tests\___mbt\junitResult.xml
