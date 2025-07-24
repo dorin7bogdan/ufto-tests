@@ -2,7 +2,7 @@ name: Test Artifact Upload
 on: [workflow_dispatch]
 jobs:
   test-upload:
-    runs-on: windows-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - run: echo "test content" > test.txt
