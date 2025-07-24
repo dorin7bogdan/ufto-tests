@@ -14,12 +14,6 @@ jobs:
           echo "Current directory: $(Get-Location)"
           dir $env:RUNNER_WORKSPACE
         shell: pwsh
-      - name: Create test file in RUNNER_WORKSPACE
-        run: |
-          echo "test content" > $env:RUNNER_WORKSPACE\test.txt
-          echo "Created file at: $env:RUNNER_WORKSPACE\test.txt"
-          if (Test-Path $env:RUNNER_WORKSPACE\test.txt) { echo "File exists" } else { echo "File missing" }
-        shell: pwsh
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
