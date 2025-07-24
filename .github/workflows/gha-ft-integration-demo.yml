@@ -1,4 +1,4 @@
-name: GitHub-Action-FT-Integration
+name: GitHub-Action-FT-Integration-Demo
 on:
   workflow_dispatch:
     inputs:
