@@ -20,9 +20,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact1
-          path: C:\Plugins\GitHub\runner_ufto-tests\_work\ufto-tests\test.txt # Ensure backslash for Windows
-          if-no-files-found: warn
-          compression-level: 6
-          overwrite: false
-          include-hidden-files: false
+          name: artifact3
+          path: C:\Plugins\GitHub\runner_ufto-tests\_work\ufto-tests\___mbt\junitResult.xml
