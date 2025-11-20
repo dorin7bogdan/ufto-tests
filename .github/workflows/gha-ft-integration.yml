@@ -22,7 +22,7 @@ on:
     branches:
       - main
 permissions:
-  actions: read  # Explicitly grant actions:read for this workflow
+  actions: write  # Explicitly grant actions:read for this workflow
   contents: read  # Retain read access to contents if needed
 env: 
     NODE_TLS_REJECT_UNAUTHORIZED: 0
@@ -42,8 +42,8 @@ jobs:
         id: gha-ft-integration
         with:
           octaneUrl: 'https://integration-master-dev.almoctane.com'
-          octaneSharedSpace: 2003
-          octaneWorkspace: 3003
+          octaneSharedSpace: 2001
+          octaneWorkspace: 3001
           octaneClientId: ${{secrets.OCTANE_CLIENT_ID}}
           octaneClientSecret: ${{secrets.OCTANE_CLIENT_SECRET}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
