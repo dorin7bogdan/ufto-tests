@@ -41,7 +41,7 @@ jobs:
         uses: MicroFocus/github-action-ft-integration-mbt@main
         id: gha-ft-integration-mbt-2
         with:
-          octaneUrl: ${{vars.NIGHTLY_DEV}}
+          octaneUrl: ${{vars.FULL_DEV}}
           octaneSharedSpace: 1001
           octaneWorkspace: 1003
           octaneClientId: ${{secrets.OCTANE_CLIENT_ID_2}}
