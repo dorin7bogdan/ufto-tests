@@ -1,4 +1,4 @@
-name: GitHub-Action-FT-integ-MBT
+name: GitHub-Action-FT-integ-MBT-2
 on:
   workflow_dispatch:
     inputs:
@@ -29,8 +29,8 @@ env:
     ACTIONS_STEP_DEBUG: true  # Enables debug logging
 jobs:
   ft_integration_job:
-    runs-on: [self-hosted, saas]
-    name: Integration-Job
+    runs-on: [self-hosted, onprem]
+    name: Integration-Job-2
     steps:
       - name: Log workflow inputs for Octane
         run: |
@@ -39,13 +39,13 @@ jobs:
 
       - name: GitHub Action FT Integration
         uses: MicroFocus/github-action-ft-integration-mbt@main
-        id: gha-ft-integration
+        id: gha-ft-integration-mbt-2
         with:
-          octaneUrl: 'https://integration-master-dev.almoctane.com'
+          octaneUrl: 'https://full-dev.almoctane.com'
           octaneSharedSpace: 1001
           octaneWorkspace: 1003
-          octaneClientId: ${{secrets.OCTANE_CLIENT_ID}}
-          octaneClientSecret: ${{secrets.OCTANE_CLIENT_SECRET}}
+          octaneClientId: ${{secrets.OCTANE_CLIENT_ID_2}}
+          octaneClientSecret: ${{secrets.OCTANE_CLIENT_SECRET_2}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
           minSyncInterval: 0.5
           logLevel: 2          
