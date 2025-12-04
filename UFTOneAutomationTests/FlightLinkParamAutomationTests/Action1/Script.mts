@@ -3,11 +3,11 @@ Dim objShell
 set objShell = CreateObject("Shell.Application")
 
 Set fileSystemObj = createobject("Scripting.FileSystemObject")
-flightsExist = "C:\Program Files (x86)\Micro Focus\UFT One\samples\Flights Application\FlightsGUI.exe"
+flightsExist = "C:\Program Files (x86)\OpenText\Functional Testing\samples\Flights Application\FlightsGUI.exe"
 If fileSystemObj.FileExists(flightsExist) then
-objShell.ShellExecute "C:\Program Files (x86)\Micro Focus\UFT One\samples\Flights Application\FlightsGUI.exe"
+objShell.ShellExecute "C:\Program Files (x86)\OpenText\Functional Testing\samples\Flights Application\FlightsGUI.exe"
 Else
-objShell.ShellExecute "C:\Program Files (x86)\OpenText\UFT One\samples\Flights Application\FlightsGUI.exe"
+objShell.ShellExecute "C:\Program Files (x86)\OpenText\Functional Testing\samples\Flights Application\FlightsGUI.exe"
 End If
 '-----------------------------------------------------------------------------------------------------------------------
 wait(5)
