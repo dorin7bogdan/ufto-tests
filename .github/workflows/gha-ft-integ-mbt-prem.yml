@@ -43,7 +43,7 @@ jobs:
         with:
           octaneUrl: ${{vars.NIGHTLY_DEV}}
           octaneSharedSpace: 1001
-          octaneWorkspace: 1003
+          octaneWorkspace: 1004
           octaneClientId: ${{secrets.OCTANE_CLIENT_ID_2}}
           octaneClientSecret: ${{secrets.OCTANE_CLIENT_SECRET_2}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
