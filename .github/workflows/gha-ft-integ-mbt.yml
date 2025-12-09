@@ -38,14 +38,14 @@ jobs:
           Write-Host "execution_parameter:: $($inputs | ConvertTo-Json -Compress)"
 
       - name: GitHub Action FT Integration
-        uses: MicroFocus/github-action-ft-integration-mbt@main
+        uses: opentext/github-action-ft-integration-mbt@main
         id: gha-ft-integration
         with:
           octaneUrl: ${{vars.INTEG_MASTER_DEV}}
-          octaneSharedSpace: 1001
-          octaneWorkspace: 1003
-          octaneClientId: ${{secrets.OCTANE_CLIENT_ID}}
-          octaneClientSecret: ${{secrets.OCTANE_CLIENT_SECRET}}
+          octaneSharedSpace: ${{vars.SHARED_SPACE_ID}}
+          octaneWorkspace: ${{vars.WORK_SPACE_ID}}
+          octaneClientId: ${{secrets.SDP_CLIENT_ID}}
+          octaneClientSecret: ${{secrets.SDP_CLIENT_SECRET}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
-          minSyncInterval: 0.5
-          logLevel: 2          
+          minSyncInterval: 2
+          logLevel: 2
