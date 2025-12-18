@@ -41,11 +41,11 @@ jobs:
         uses: MicroFocus/github-action-ft-integration-mbt@main
         id: gha-ft-integration-mbt-2
         with:
-          octaneUrl: ${{vars.NIGHTLY_DEV}}
+          octaneUrl: ${{vars.NADAV_ONPREM}}
           octaneSharedSpace: 1001
           octaneWorkspace: 1004
-          octaneClientId: ${{secrets.OCTANE_CLIENT_ID_2}}
-          octaneClientSecret: ${{secrets.OCTANE_CLIENT_SECRET_2}}
+          octaneClientId: ${{secrets.SDP_CLIENT_ID_2}}
+          octaneClientSecret: ${{secrets.SDP_CLIENT_SECRET_2}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
           minSyncInterval: 0.5
           logLevel: 2          
