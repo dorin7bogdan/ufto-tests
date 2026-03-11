@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       testPaths:
-        description: 'Tests to run current repository. Multiple tests must be separated by semi-colon'
+        description: 'Tests to run current repository. Multiple tests must be provided as a string array ["path\to\test1", "path\to\test2", ...]'
         required: true
-        default: "Quicks\QuickPass"
+        default: ""
 permissions:
   actions: read  # Explicitly grant actions:read for this workflow
   contents: read  # Retain read access to contents if needed
