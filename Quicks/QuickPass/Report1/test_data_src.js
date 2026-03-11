@@ -1,0 +1,1 @@
+﻿var __testDataSource={items:[{dataFilePath:'Default.xlsx',dataFileFormat:'excel',dataFileFolder:'D:\\Work\\Git\\Azure\\ADM-FT-ToolsLauncher\\bin\\Release\\ufto-tests\\QuickPass\\Report1',namePairs:[]}]};

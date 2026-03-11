@@ -1,0 +1,21 @@
+name: FT-integration
+on:
+  workflow_dispatch:
+permissions:
+  actions: read  # Explicitly grant actions:read for this workflow
+  contents: read  # Retain read access to contents if needed
+env: 
+    NODE_TLS_REJECT_UNAUTHORIZED: 0
+    ACTIONS_STEP_DEBUG: true  # Enables debug logging
+jobs:
+  ft_integration_job:
+    runs-on: [self-hosted]
+    name: Integration-Job
+    steps:
+      - name: FT Integration
+        uses: dorin7bogdan/functional-testing@main
+        id: ft-integration
+        with:
+          testPaths: ''
+          githubToken: ${{secrets.GITHUB_TOKEN}}
+          logLevel: 2
