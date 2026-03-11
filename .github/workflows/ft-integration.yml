@@ -16,6 +16,6 @@ jobs:
         uses: dorin7bogdan/functional-testing@main
         id: ft-integration
         with:
-          testPaths: ''
+          testPaths: 'Quicks\QuickPass'
           githubToken: ${{secrets.GITHUB_TOKEN}}
           logLevel: 2
