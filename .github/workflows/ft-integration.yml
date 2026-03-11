@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       testPaths:
-        description: 'Tests to run current repository. Multiple tests must be provided as a string array ["path\to\test1", "path\to\test2", ...]'
+        description: 'Test paths. Examples: "path\to\test1" or ["path\to\test1", "path\to\test2", ...]'
         required: true
         default: ""
 permissions:
