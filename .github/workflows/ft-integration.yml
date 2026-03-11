@@ -1,6 +1,11 @@
 name: FT-integration
 on:
   workflow_dispatch:
+    inputs:
+      testPaths:
+        description: 'Tests to run current repository. Multiple tests must be separated by semi-colon'
+        required: false
+        default: "Quicks\QuickPass"
 permissions:
   actions: read  # Explicitly grant actions:read for this workflow
   contents: read  # Retain read access to contents if needed
@@ -16,6 +21,6 @@ jobs:
         uses: dorin7bogdan/functional-testing@main
         id: ft-integration
         with:
-          testPaths: 'Quicks\QuickPass'
+          testPaths: ${{inputs.testPaths}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
           logLevel: 2
