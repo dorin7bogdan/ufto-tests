@@ -4,7 +4,7 @@ on:
     inputs:
       testPaths:
         description: 'Tests to run current repository. Multiple tests must be separated by semi-colon'
-        required: false
+        required: true
         default: "Quicks\QuickPass"
 permissions:
   actions: read  # Explicitly grant actions:read for this workflow
