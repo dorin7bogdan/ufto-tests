@@ -1,0 +1,6 @@
+<Mtbx>
+    <Test name="Pass" path="ufto-tests\Quicks\QuickPass"></Test>
+    <Test name="Warn" path="ufto-tests\Quicks\QuickWarn"></Test>
+    <Test name="Fail" path="ufto-tests\Quicks\QuickFail"></Test>
+    <Test name="Error" path="ufto-tests\Quicks\QuickError"></Test>
+</Mtbx>

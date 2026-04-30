@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       testPaths:
-        description: 'Test path(s)' # "path\to\test" or ["path\to\test1", "path\to\test2", ...]
+        description: 'Test path(s)' # "path\to\folder" or "path\to\GUITest1" or array of paths: ["path\\to\\GUITest1", "path\\to\\GUITest2", ...]. Absolute paths are not allowed. The paths will be validated against the repository root.
         required: true
         default: ""
 permissions:
