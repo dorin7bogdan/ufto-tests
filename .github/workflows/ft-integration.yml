@@ -23,4 +23,5 @@ jobs:
         with:
           testPaths: ${{inputs.testPaths}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
+          archiveReportsAsSingleArtifact: true
           logLevel: 2
