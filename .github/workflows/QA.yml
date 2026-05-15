@@ -1,4 +1,4 @@
-name: FT-integration
+name: FT-integration-QA
 on:
   workflow_dispatch:
     inputs:
