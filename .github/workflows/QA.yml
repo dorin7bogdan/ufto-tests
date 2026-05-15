@@ -13,13 +13,13 @@ env:
     NODE_TLS_REJECT_UNAUTHORIZED: 0
     ACTIONS_STEP_DEBUG: true  # Enables debug logging
 jobs:
-  ft_integration_job:
+  ft_integration_job_qa:
     runs-on: [self-hosted]
-    name: Integration-Job
+    name: Integration-Job-QA
     steps:
-      - name: FT Integration
+      - name: FT Integration QA
         uses: dorin7bogdan/functional-testing@main
-        id: ft-integration
+        id: ft-integration-qa
         with:
           testPaths: ${{inputs.testPaths}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
