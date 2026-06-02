@@ -28,4 +28,5 @@ jobs:
           almPassword:
           almDomain: AUTOMATION
           almProject: CI_Integration
+          ftlUrl: https://raw.githubusercontent.com/dorin7bogdan/tools/main/FTToolsLauncher_26.3.exe
           logLevel: 2
