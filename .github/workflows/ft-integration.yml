@@ -25,3 +25,4 @@ jobs:
           githubToken: ${{secrets.GITHUB_TOKEN}}
           archiveReportsAsSingleArtifact: false
           logLevel: 2
+          cleanupTestRunFiles: false
