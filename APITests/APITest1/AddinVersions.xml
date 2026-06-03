@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AddinVersions>
+  <AddinVersion AddinId="HP.ST.STFRAMEWORKUPGRADERSADDIN" Version="16.0.0.1006" />
+  <AddinVersion AddinId="HP.ST.VTDBASICACTIVITY" Version="16.0.0.1006" />
+  <AddinVersion AddinId="HP.ST.UFTADDIN" Version="16.0.0.1006" />
+</AddinVersions>

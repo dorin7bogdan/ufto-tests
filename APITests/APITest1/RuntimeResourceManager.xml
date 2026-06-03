@@ -1,0 +1,3 @@
+<RuntimeResourceManager>
+<RuntimeResource><Key>{Step.GeneralProperties.CallQTPTest4.ScriptPath}</Key><Path>C:\TFSTests\AllPurposes</Path><Value>..\AllPurposes</Value><AddinId>DefaultDependencyResolver</AddinId></RuntimeResource>
+</RuntimeResourceManager>
