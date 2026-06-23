@@ -24,4 +24,5 @@ jobs:
           testPaths: ${{inputs.testPaths}}
           githubToken: ${{secrets.GITHUB_TOKEN}}
           archiveReportsAsSingleArtifact: true
+          ftlUrl: https://raw.githubusercontent.com/dorin7bogdan/tools/main/FTToolsLauncher_26.3.exe
           logLevel: 2
