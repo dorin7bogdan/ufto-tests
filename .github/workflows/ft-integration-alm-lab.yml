@@ -1,0 +1,32 @@
+name: FT-integration-ALM-Lab
+on:
+  workflow_dispatch:
+    inputs:
+      testSetId:
+        description: 'Test Set ID' 
+        required: true
+        default: ""
+permissions:
+  actions: read  # Explicitly grant actions:read for this workflow
+  contents: read  # Retain read access to contents if needed
+env: 
+    NODE_TLS_REJECT_UNAUTHORIZED: 0
+    ACTIONS_STEP_DEBUG: true  # Enables debug logging
+jobs:
+  ft_integration_alm:
+    runs-on: [self-hosted]
+    name: Integration-Job-ALM-Lab-Mgmt
+    steps:
+      - name: FT Integration ALM Lab Management
+        uses: dorin7bogdan/functional-testing@main
+        id: ft-integration-alm-lab
+        with:
+          runType: alm-lab
+          almTestSets: ${{inputs.testSetId}}
+          almServerUrl: http://10.168.86.75:8080/qcbin
+          almUsername: sa
+          almPassword:
+          almDomain: AUTOMATION
+          almProject: CI_Integration
+          ftlUrl: https://raw.githubusercontent.com/dorin7bogdan/tools/main/FTToolsLauncher_26.3.exe
+          logLevel: 2
