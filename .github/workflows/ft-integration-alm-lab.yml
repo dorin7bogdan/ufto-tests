@@ -22,7 +22,7 @@ jobs:
         id: ft-integration-alm-lab
         with:
           runType: alm-lab
-          almTestSets: ${{inputs.testSetId}}
+          almTestSetId: ${{inputs.testSetId}}
           almServerUrl: http://10.168.86.75:8080/qcbin
           almUsername: sa
           almPassword:
