@@ -7,9 +7,9 @@ on:
         required: true
         default: ""
 permissions:
-  actions: read  # Explicitly grant actions:read for this workflow
   contents: read  # Retain read access to contents if needed
-env: 
+#  actions: read  # Explicitly grant actions:read for this workflow
+env:
     NODE_TLS_REJECT_UNAUTHORIZED: 0
     ACTIONS_STEP_DEBUG: true  # Enables debug logging
 jobs:

@@ -6,9 +6,9 @@ on:
         description: 'Test set(s)' # "path\to\folder" or "path\to\GUITest1" or array of paths: ["path\\to\\GUITest1", "path\\to\\GUITest2", ...]. Absolute paths are not allowed. The paths will be validated against the repository root.
         required: true
         default: ""
-permissions:
-  actions: read  # Explicitly grant actions:read for this workflow
-  contents: read  # Retain read access to contents if needed
+#permissions:
+#  actions: read  # Explicitly grant actions:read for this workflow
+#  contents: read  # Retain read access to contents if needed
 env: 
     NODE_TLS_REJECT_UNAUTHORIZED: 0
     ACTIONS_STEP_DEBUG: true  # Enables debug logging
