@@ -25,5 +25,5 @@ jobs:
           githubToken: ${{secrets.GITHUB_TOKEN}}
           archiveReportsAsSingleArtifact: false
           logLevel: 3
-          cleanupTestRunFiles: true
+          cleanupTestRunFiles: false
           ftlUrl: https://raw.githubusercontent.com/dorin7bogdan/tools/main/FTToolsLauncher_26.3.exe
