@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ResourceManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ID>2319df6b-e8c3-4563-a5c8-1ba47e1d2284</ID>
+  <Name>Flights_SO</Name>
+  <Type>WSDL</Type>
+  <Version>1</Version>
+  <CreationDate>2026-07-14T06:37:00.6428226+00:00</CreationDate>
+  <UpdateDate>2026-07-14T06:37:00.6428226+00:00</UpdateDate>
+  <LoaderID>SignatureResourceHandler</LoaderID>
+  <MetaDataSignatureFile>433dd94d-87e1-4597-92c8-6f3a36b67183.xml</MetaDataSignatureFile>
+  <TestResourceId>433dd94d-87e1-4597-92c8-6f3a36b67183</TestResourceId>
+  <RepositoryType>TestRepository</RepositoryType>
+  <SignatureCodonId>HP.ST.WebServiceWsdl</SignatureCodonId>
+  <SignatureAddinVersion>2026.3.0.64</SignatureAddinVersion>
+  <Properties>
+    <Item>
+      <Key>
+        <string>RepositoryPath</string>
+      </Key>
+      <Value>
+        <string>C:\Users\_ft_auto\Desktop\FTo-Tests\shrirang\fto-tests\APITests\FlightSoapAPI_Fail\EmbeddedResources</string>
+      </Value>
+    </Item>
+    <Item>
+      <Key>
+        <string>ResourceOrigin</string>
+      </Key>
+      <Value>
+        <string>C:\Users\_ft_auto\Desktop\FTo-Tests\shrirang\fto-tests\APITests\FlightSoapAPI_Fail\EmbeddedResources\Flights_SO</string>
+      </Value>
+    </Item>
+    <Item>
+      <Key>
+        <string>PrototypeDbVersion</string>
+      </Key>
+      <Value>
+        <string>2026.3.0.64</string>
+      </Value>
+    </Item>
+  </Properties>
+</ResourceManifest>
