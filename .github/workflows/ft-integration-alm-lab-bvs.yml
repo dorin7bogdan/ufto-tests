@@ -25,3 +25,4 @@ jobs:
           almPassword:
           almDomain: AUTOMATION
           almProject: CI_Integration
+          logLevel: 2
