@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       bvsId:
-        description: 'Test Set ID' 
+        description: 'BVS ID'
         required: true
         default: ""
 env:
