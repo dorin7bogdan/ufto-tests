@@ -1,0 +1,27 @@
+name: FT-integration-ALM-Lab
+on:
+  workflow_dispatch:
+    inputs:
+      bvsId:
+        description: 'Test Set ID' 
+        required: true
+        default: ""
+env:
+    NODE_TLS_REJECT_UNAUTHORIZED: 0
+    ACTIONS_STEP_DEBUG: true  # Enables debug logging
+jobs:
+  ft_integration_alm_lab_bvs:
+    runs-on: [self-hosted]
+    name: Integration-Job-ALM-Lab-Mgmt-BVS
+    steps:
+      - name: FT Integration ALM Lab Management
+        uses: dorin7bogdan/functional-testing@main
+        id: ft-integration-alm-lab
+        with:
+          runType: alm-lab
+          almBvsId: ${{inputs.bvsId}}
+          almServerUrl: http://10.168.86.75:8080/qcbin
+          almUsername: sa
+          almPassword:
+          almDomain: AUTOMATION
+          almProject: CI_Integration
