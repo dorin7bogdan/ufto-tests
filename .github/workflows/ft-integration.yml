@@ -18,7 +18,7 @@ jobs:
     name: Integration-Job
     steps:
       - name: FT Integration
-        uses: dorin7bogdan/functional-testing@main
+        uses: dorin7bogdan/functional-testing@latest
         id: ft-integration
         with:
           testPaths: ${{inputs.testPaths}}
